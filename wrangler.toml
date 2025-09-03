@@ -1,0 +1,8 @@
+name = "rechnungs-proxy"
+main = "src/worker.js"
+compatibility_date = "2024-09-20"
+
+
+[vars]
+# optional: erlaubte Domains (Komma-separiert), leer = alle
+ALLOWED_ORIGINS = ""
