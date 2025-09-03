@@ -1,0 +1,57 @@
+
+
+---
+
+
+# index.html
+
+
+```html
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rechnungsassistent (MVP)</title>
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<header>
+<h1>🧾 Rechnungsassistent (MVP)</h1>
+<p>QR scannen oder Datei hochladen. Der Assistent erklärt dir die Rechnung und liest sie vor.</p>
+</header>
+
+
+<main>
+<section class="card">
+<button id="startScan">📷 Kamera starten & QR scannen</button>
+<video id="video" playsinline muted></video>
+<div class="row">
+<input id="pdfFile" type="file" accept="application/pdf,image/*" />
+<button id="stopScan" disabled>Stop</button>
+</div>
+<p id="scanStatus">Bereit.</p>
+</section>
+
+
+<section class="card">
+<h2>Erkannte Rechnung</h2>
+<div id="invoiceJson" class="mono"></div>
+<div class="row">
+<input id="question" placeholder="Frag z. B.: Wann ist fällig?" />
+<button id="askBtn">Fragen</button>
+<button id="speakBtn">Antwort vorlesen</button>
+</div>
+<p id="answer" class="answer"></p>
+</section>
+</main>
+
+
+<footer>
+<small>Client-only MVP. Optionaler Proxy/Worker konfigurierbar in <code>js/main.js</code>.</small>
+</footer>
+
+
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
