@@ -4,8 +4,14 @@ import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.17
 import { parseInvoiceText, generateExplanation } from "./parser.js";
 
 
-// Optional: Worker-Proxy gegen CORS-Probleme (sonst = null)
-const PROXY_URL = null; // z.B. "https://rechnungs-proxy.DEIN.workers.dev";
+// ===== Konfiguration =====
+// Basis-URL deines Cloudflare Workers (ohne Slash am Ende), z. B. "https://rechnungs-proxy.DEIN.workers.dev"
+const WORKER_BASE = null;
+const USE_GEMINI = !!WORKER_BASE; // Chat nur aktiv, wenn Worker gesetzt ist
+
+
+// Optional: reiner Proxy gegen CORS-Probleme (nutzt denselben Worker)
+const PROXY_URL = WORKER_BASE; // wenn gesetzt, wird /proxy genutzt
 
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -47,4 +53,8 @@ els.start.disabled = true; els.stop.disabled = false;
 
 codeReader = new BrowserMultiFormatReader();
 const devices = await navigator.mediaDevices.enumerateDevices();
+const cams = devices.filter(d => d.kind === 'videoinput');
+const backCam = cams[cams.length - 1];
+
+
 });
